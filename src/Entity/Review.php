@@ -33,13 +33,13 @@ class Review
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="yes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="yes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity=restaurant::class, inversedBy="yes")
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="yes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $restaurantId;
@@ -47,9 +47,9 @@ class Review
     /**
      * @param $created_at
      */
-    public function __construct($created_at)
+    public function __construct()
     {
-        $this->created_at= new \DateTime('now');
+        $this->created_at= new \DateTimeImmutable('now');
     }
 
     public function getId(): ?int

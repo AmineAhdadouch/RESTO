@@ -72,5 +72,37 @@ class RestaurantRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
     */
+    public function getLatest($number): array
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.created_at','DESC')
+            ->setMaxResults($number)
+            ->getQuery()
+            ->getResult();
+    }
+    public function findByName($name): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT r
+        FROM App\Entity\Restaurant r
+        WHERE r.name like :name'
+        )->setParameter('name', "%$name%");
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+    public function threeBestRestaurants(){
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            '
+            SELECT r.name , AVG(re.rating) average
+            from App\Entity\Restaurant r , App\Entity\Review re
+            WHERE r.id = re.restaurantId
+            GROUP BY r.name
+            order by average DESC'
+        )->setMaxResults(3);
+        return $query->getResult();
+    }
 }

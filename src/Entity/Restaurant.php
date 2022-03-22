@@ -35,7 +35,7 @@ class Restaurant
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=city::class, inversedBy="restaurants")
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="restaurants")
      * @ORM\JoinColumn(nullable=false)
      */
     private $cityId;

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReviewController!{% endblock %}
+
+{% block body %}
+    <form action="{{ path('review.create') }}" method="post">
+        message: <textarea type="text" name="message"></textarea>
+        rating : <input type="number" name="rating">
+        <select id="user" name="user">
+            {% if users|length > 0 %}
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            {% else %}
+                <option>Sorry, No users yet!!!</option>
+            {% endif %}
+        </select>
+        <select id="restaurant" name="restaurant">
+            {% if restaurants|length > 0 %}
+                {% for restaurant in restaurants %}
+                    <option value="{{ restaurant.id }}">{{ restaurant.name }}</option>
+                {% endfor %}
+            {% else %}
+                <option>Sorry, No restaurants yet!!!</option>
+            {% endif %}
+        </select>
+        <input type="submit" value="add">
+
+
+
+    </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}all restaurants{% endblock %}
+
+{% block body %}
+   <form action="{{ path('app_restaurant_new') }}" method="post">
+       name : <input type="text" name="name">
+       description : <textarea type="text" name="description"></textarea>
+        <select class="form-control" id="city" name="city">
+           {% if cities|length > 0 %}
+               {% for city in cities %}
+                   <option value="{{ city.id }}">{{ city.name }}</option>
+               {% endfor %}
+           {% else %}
+               <option>Sorry, No cities yet!!!</option>
+           {% endif %}
+       </select>
+       <input type="submit" value="add">
+
+
+
+   </form>
+{% endblock %}

@@ -7,26 +7,33 @@
         <p class="alert alert-success">{{ message }}</p>
         <br>
     {% endfor %}
-    <table class="table">
+    <form action="" method="get">
+            <input type="text" class="form-control" placeholder="Search"  name="restaurant">
+            <button type="submit" class="input-group-text" >Search</button>
+    </form>
+
+    <h2>liste des restaurents</h2>
+    <a href="{{ path('restaurant.new') }}">add restaurant</a><br>
+    <a href="{{ path('review.new') }}">add review</a><br>
+    <a href="{{ path('app_user') }}">liste users</a><br><br>
+    <table class="table" border="2px" style="text-align: center;">
         <thead>
         <tr>
-            <th scope="col">logo</th>
             <th scope="col">name</th>
             <th scope="col">description</th>
             <th scope="col">created at</th>
             <th scope="col">city</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
         {% for restaurant in restaurants %}
             <tr>
-
-                <th>
-                </th>
                 <td>{{ restaurant.getName() }}</td>
                 <td>{{ restaurant.getDescription() }}</td>
-                <td>{{ restaurant.getName() }}</td>
+                <td>{{ restaurant.getCreatedAt()|date('Y-M-D')}}</td>
                 <td>{{ restaurant.getCityId().getName() }}</td>
+                <td><a href="{{ path('restaurant_detail',{'id':restaurant.id}) }}">Detail</a></td>
             </tr>
         {% endfor %}
         </tbody>

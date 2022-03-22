@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurantController!{% endblock %}
+
+{% block body %}
+<h2>liste des details</h2>
+<a href="{{ path('restaurant.new') }}">add restaurant</a><br><br>
+<a href="{{ path('review.new') }}">add review</a><br><br>
+<a href="{{ path('app_user') }}">liste users</a><br><br>
+<table class="table" border="1px">
+    <tr>
+        <td scope="col">name :</td>
+        <td>{{ restaurant.getName() }}</td>
+    </tr>
+    <tr>
+        <td scope="col">City :</td>
+        <td>{{ restaurant.cityId.name }}</td>
+    </tr>
+    <tr>
+        <td scope="col">Moyenne :</td>
+        <td>{{ moyenne }}</td>
+    </tr>
+</table><br><br>
+    <table border="2px" style="text-align: center">
+    {% for review in reviews %}
+        <tr>
+            <th>Message</th>
+            <th>Rating</th>
+            <th>Date</th>
+            <th>Restaurant</th>
+            <th>User</th>
+        </tr>
+    <tr>
+        <td>{{ review.message}}</td>
+        <td>{{ review.rating }}</td>
+        <td>{{ review.getCreatedAt()|date('Y')}}</td>
+        <td>{{ review.restaurantId.name}}</td>
+        <td>{{ review.userId.username}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
